@@ -14,6 +14,7 @@ const nextConfig = {
     return config;
   },
   images: {
+    domains: ["unsplash.com"],
     remotePatterns: [
       {
         protocol: "https",
