@@ -1,4 +1,5 @@
 import TourioPlaces from "../../../../db/models/TourioPlaces";
+import Comment from "../../../../db/models/Comment";
 import dbConnect from "../../../../db/dbConnect";
 
 export default async function handler(request, response) {
@@ -25,6 +26,7 @@ export default async function handler(request, response) {
     // DELETE PLACE BY ID
     if (request.method === "DELETE") {
       const deletedPlace = await TourioPlaces.findByIdAndDelete(id);
+      await Comment.deleteMany({ _id: { $in: deletedPlace.comments } });
       response.status(200).json({ message: `${deletedPlace.name} successfully deleted` });
     }
   } catch (error) {
