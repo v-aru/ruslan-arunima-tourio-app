@@ -33,9 +33,17 @@ export default function DetailsPage() {
   const router = useRouter();
   const { isReady } = router;
   const { id } = router.query;
-  const { data: place, isLoading, error } = useSWR(`/api/places/${id}`);
+  const { data, isLoading, error } = useSWR(isReady ? `/api/places/${id}` : null);
 
-  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+  const comments = data?.comments || [];
+  const { data: placeComments } = useSWR(
+    comments.length > 0 ? `/api/comments?ids=${comments.join(",")}` : null
+  );
+
+  if (!isReady || isLoading) return <h2>Loading...</h2>;
+  if (error) return <h2>Error loading place details</h2>;
+
+  const { description, image, location, mapURL, name } = data;
 
   async function deletePlace() {
     if (confirm("Are you sure?")) {
@@ -47,8 +55,6 @@ export default function DetailsPage() {
       }
     }
   }
-
-  const { description, image, location, mapURL, name } = place;
 
   return (
     <>
@@ -81,7 +87,7 @@ export default function DetailsPage() {
           Delete
         </StyledButton>
       </ButtonContainer>
-      <Comments locationName={name} />
+      <Comments locationName={name} comments={placeComments || []} />
     </>
   );
 }

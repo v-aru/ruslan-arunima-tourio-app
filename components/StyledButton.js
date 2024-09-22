@@ -9,12 +9,12 @@ export const StyledButton = styled.button`
   font-weight: bold;
   border: none;
   font-size: inherit;
+  cursor: pointer;
 
   ${({ variant }) =>
     variant === "delete" &&
     css`
       background-color: firebrick;
       color: white;
-      cursor: pointer;
     `}
 `;
