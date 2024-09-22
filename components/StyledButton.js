@@ -15,5 +15,6 @@ export const StyledButton = styled.button`
     css`
       background-color: firebrick;
       color: white;
+      cursor: pointer;
     `}
 `;
