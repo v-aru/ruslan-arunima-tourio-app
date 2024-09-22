@@ -2,18 +2,32 @@ import TourioPlaces from "../../../../db/models/TourioPlaces";
 import dbConnect from "../../../../db/dbConnect";
 
 export default async function handler(request, response) {
-  await dbConnect();
   const { id } = request.query;
 
-  if (!id) {
-    return;
-  }
+  try {
+    await dbConnect();
 
-  if (request.method === "GET") {
-    const place = await TourioPlaces.findById(id);
-    if (!place) {
-      return response.status(404).json({ status: "Not found" });
+    // GET ALL PLACES
+    if (request.method === "GET") {
+      const place = await TourioPlaces.findById(id);
+      if (!place) {
+        return response.status(404).json({ status: "Not found" });
+      }
+      response.status(200).json(place);
     }
-  response.status(200).json(place);
+
+    // UPDATE PLACE BY ID
+    if (request.method === "PATCH") {
+      const updatedPlace = await TourioPlaces.findByIdAndUpdate(id, request.body);
+      response.status(200).json({ message: `${updatedPlace.name} successfully updated` });
+    }
+
+    // DELETE PLACE BY ID
+    if (request.method === "DELETE") {
+      const deletedPlace = await TourioPlaces.findByIdAndDelete(id);
+      response.status(200).json({ message: `${deletedPlace.name} successfully deleted` });
+    }
+  } catch (error) {
+    console.log(error);
   }
 }

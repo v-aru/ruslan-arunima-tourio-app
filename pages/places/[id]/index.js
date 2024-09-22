@@ -33,26 +33,31 @@ export default function DetailsPage() {
   const router = useRouter();
   const { isReady } = router;
   const { id } = router.query;
-  const {
-    data: { place, comments } = {},
-    isLoading,
-    error,
-  } = useSWR(`/api/places/${id}`);
+  const { data: place, isLoading, error } = useSWR(`/api/places/${id}`);
 
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
-  function deletePlace() {
-    console.log("deleted?");
+  async function deletePlace() {
+    if (confirm("Are you sure?")) {
+      const response = await fetch(`/api/places/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        router.push("/");
+      }
+    }
   }
+
+  const { description, image, location, mapURL, name } = place;
 
   return (
     <>
-      <Link href={'/'} passHref legacyBehavior>
+      <Link href={"/"} passHref legacyBehavior>
         <StyledLink justifySelf="start">back</StyledLink>
       </Link>
       <ImageContainer>
         <StyledImage
-          src={place.image}
+          src={image}
           priority
           fill
           sizes="(max-width: 768px) 100vw,
@@ -62,12 +67,12 @@ export default function DetailsPage() {
         />
       </ImageContainer>
       <h2>
-        {place.name}, {place.location}
+        {name}, {location}
       </h2>
-      <Link href={place.mapURL} passHref legacyBehavior>
+      <Link href={mapURL} passHref legacyBehavior>
         <StyledLocationLink>Location on Google Maps</StyledLocationLink>
       </Link>
-      <p>{place.description}</p>
+      <p>{description}</p>
       <ButtonContainer>
         <Link href={`/places/${id}/edit`} passHref legacyBehavior>
           <StyledLink>Edit</StyledLink>
@@ -76,7 +81,7 @@ export default function DetailsPage() {
           Delete
         </StyledButton>
       </ButtonContainer>
-      <Comments locationName={place.name} comments={comments} />
+      <Comments locationName={name} />
     </>
   );
 }
