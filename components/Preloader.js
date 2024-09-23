@@ -16,8 +16,8 @@ export const Preloader = styled.div`
   position: fixed;
   left: 50%;
   top: 50vh;
-  margin-left: -40px;
-  margin-top: -40px;
+  margin-left: -25px;
+  margin-top: -25px;
   &:before {
     content: "";
     display: block;
