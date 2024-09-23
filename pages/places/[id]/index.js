@@ -6,6 +6,7 @@ import { StyledLink } from "../../../components/StyledLink.js";
 import { StyledButton } from "../../../components/StyledButton.js";
 import { StyledImage } from "../../../components/StyledImage.js";
 import Comments from "../../../components/Comments.js";
+import { Preloader } from "../../../components/Preloader.js";
 
 const ImageContainer = styled.div`
   position: relative;
@@ -40,7 +41,7 @@ export default function DetailsPage() {
     comments.length > 0 ? `/api/comments?ids=${comments.join(",")}` : null
   );
 
-  if (!isReady || isLoading) return <h2>Loading...</h2>;
+  if (!isReady || isLoading) return <Preloader />;
   if (error) return <h2>Error loading place details</h2>;
 
   const { description, image, location, mapURL, name } = data;

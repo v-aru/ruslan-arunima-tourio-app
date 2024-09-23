@@ -3,6 +3,7 @@ import Card from "../components/Card.js";
 import useSWR from "swr";
 import Link from "next/link.js";
 import { StyledLink } from "../components/StyledLink.js";
+import { Preloader } from "../components/Preloader.js";
 
 const List = styled.ul`
   list-style: none;
@@ -26,7 +27,7 @@ export default function Home() {
   const { data, isLoading, error } = useSWR("/api/places", { fallbackData: [] });
 
   if (isLoading || error) {
-    return <h2>Loading...</h2>;
+    return <Preloader />;
   }
 
   return (

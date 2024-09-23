@@ -3,6 +3,7 @@ import Link from "next/link";
 import useSWR from "swr";
 import Form from "../../../components/Form.js";
 import { StyledLink } from "../../../components/StyledLink.js";
+import { Preloader } from "../../../components/Preloader.js";
 
 export default function EditPage() {
   const router = useRouter();
@@ -23,7 +24,7 @@ export default function EditPage() {
     }
   }
 
-  if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+  if (!isReady || isLoading || error) return <Preloader />;
 
   return (
     <>
