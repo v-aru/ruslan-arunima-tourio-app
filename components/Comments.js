@@ -3,11 +3,14 @@ import { FormContainer, Input, Label } from "./Form";
 import { StyledButton } from "./StyledButton.js";
 import { useRouter } from "next/router.js";
 import useSWR from "swr";
+import { useState } from "react";
 
 export default function Comments({ locationName, comments }) {
   const router = useRouter();
   const { id } = router.query;
   const { mutate } = useSWR(`/api/places/${id}`);
+  const [editCommentId, setEditCommentId] = useState(null);
+  const [newCommentText, setNewCommentText] = useState("");
 
   const Article = styled.article`
     display: flex;
@@ -47,6 +50,48 @@ export default function Comments({ locationName, comments }) {
     }
   }
 
+  async function handleEditComment (e, commentId) {
+    e.preventDefault();
+    try {
+      const response = await fetch(`/api/comments/${commentId}`, {
+        method: "PUT",
+        body: JSON.stringify({ comment: newCommentText}),
+        headers: {
+          "Content-Type" : "application/json",
+        },
+      });
+      if (response.ok) {
+        setEditCommentId(null);
+        setNewCommentText("");
+        mutate();
+      }
+    } catch (e) {
+      console.log(error);
+    }
+  }
+
+  async function handleDeleteComment (commentId) {
+    try {
+      const response = await fetch (`/api/comments/${commentId}`, {
+        method: "DELETE",
+        body: JSON.stringify({ placeId : id}),
+        headers: {
+          "Content-Type" : "application/json",
+        },
+      })
+      if (response.ok) {
+        mutate();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const startEditing = (commentId, currentComment) => {
+    setEditCommentId(commentId);
+    setNewCommentText(currentComment);
+  };
+
   return (
     <Article>
       {comments.length > 0 ? (
@@ -60,7 +105,23 @@ export default function Comments({ locationName, comments }) {
                     <strong>{name}</strong> commented on {locationName}
                   </small>
                 </p>
-                <span>{comment}</span>
+                { editCommentId === _id ? (
+                  <>
+                    <Input type="text" value={newCommentText} onChange={(e) => setNewCommentText(e.target.value)} />
+                    <StyledButton onClick={(e) => handleEditComment(e, _id)}> SAVE </StyledButton>
+                    <StyledButton onClick={() => setEditCommentId(null)}> CANCEL </StyledButton>
+                  </>
+                  ) : (
+                    <span>{comment}</span>
+                    )}
+                    <div>
+                        <StyledButton onClick={() => startEditing(_id, comment)}>
+                          Edit
+                        </StyledButton>
+                        <StyledButton onClick={() => handleDeleteComment(_id)}>
+                          Delete
+                        </StyledButton>
+                      </div>
               </div>
             );
           })}
