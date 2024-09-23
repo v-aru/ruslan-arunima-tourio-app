@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const StyledLink = styled.a`
-  background-color: #FFC100;
+  background-color: #7FBEEB;
   padding: 10px;
   justify-content: center;
   border-radius: 0.6rem;

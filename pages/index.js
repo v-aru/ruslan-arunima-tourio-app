@@ -47,7 +47,7 @@ export default function Home() {
         })}
       </List>
       <Link href="/create" passHref legacyBehavior>
-        <FixedLink>+ place</FixedLink>
+        <FixedLink>+ Add new place</FixedLink>
       </Link>
     </>
   );

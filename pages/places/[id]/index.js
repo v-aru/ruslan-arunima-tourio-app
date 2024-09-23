@@ -27,7 +27,8 @@ const ButtonContainer = styled.section`
 const StyledLocationLink = styled(StyledLink)`
   justify-content: center;
   border: 3px solid #0A1045;
-  background-color: #9DBEBB;
+  background-color: #81ADC8;
+  color: black;
   font-size: 1rem;
   padding: 5px 10px;
   border-radius: 0.4rem;

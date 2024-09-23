@@ -11,7 +11,7 @@ const Main = styled.main`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 90px;
 `;
 
 export default function Layout({ children }) {
@@ -20,7 +20,7 @@ export default function Layout({ children }) {
       <Head>
         <title>Tourio</title>
       </Head>
-      <TitleBar />
+      <TitleBar/>
       <Main>{children}</Main>
     </>
   );
