@@ -18,6 +18,7 @@ export const Textarea = styled.textarea`
   border: 3px solid black;
   border-radius: 0.5rem;
   padding: 0.5rem;
+  resize: both;
 `;
 
 export const Label = styled.label`

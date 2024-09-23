@@ -24,4 +24,13 @@ export const StyledLink = styled.a`
       background-color: white;
       border: 3px solid #0A1045;
     `}
+  
+    &:hover {
+      background-color: #03346E;  
+      color: white;
+
+      svg {
+        fill: white;
+      }
+    }
 `;

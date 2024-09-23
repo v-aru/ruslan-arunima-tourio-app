@@ -15,7 +15,14 @@ export const StyledButton = styled.button`
   ${({ variant }) =>
     variant === "delete" &&
     css`
-      background-color: firebrick;
+      background-color: #E74C3C;
       color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 0.4rem;
+      
+      &:hover {
+        background-color: #c0392b;
+      }
     `}
 `;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -20,10 +20,20 @@ const Title = styled.h1`
   color: white;
 `;
 
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
 const GlobeIcon = styled.svg`
   width: 24px;
   height: 24px;
   fill: white;
+  animation: ${rotate} 4s linear infinite;
 `;
 
 export default function TitleBar() {

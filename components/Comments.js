@@ -143,8 +143,10 @@ export default function Comments({ locationName, comments }) {
                 { editCommentId === _id ? (
                   <>
                     <Input type="text" value={newCommentText} onChange={(e) => setNewCommentText(e.target.value)} />
-                    <StyledButton onClick={(e) => handleEditComment(e, _id)}> SAVE </StyledButton>
-                    <StyledButton onClick={() => setEditCommentId(null)}> CANCEL </StyledButton>
+                    &nbsp;
+                    <StyledButton onClick={(e) => handleEditComment(e, _id)}> Save </StyledButton> 
+                    &nbsp;
+                    <StyledButton onClick={() => setEditCommentId(null)}> Cancel </StyledButton>
                   </>
                   ) : (
                     <span>{comment}</span>
