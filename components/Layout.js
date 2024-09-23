@@ -9,6 +9,9 @@ const Main = styled.main`
   padding: 0.5rem;
   position: relative;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 100px;
 `;
 
 export default function Layout({ children }) {
