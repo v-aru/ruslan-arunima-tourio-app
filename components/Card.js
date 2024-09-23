@@ -3,19 +3,37 @@ import styled from "styled-components";
 import { StyledImage } from "./StyledImage.js";
 
 const Article = styled.article`
-  border: 5px solid black;
-  border-radius: 0.8rem;
-  padding: 0.5rem;
+  padding: 0px;
+  background: #fff;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.5);
+  padding-bottom: 24px;
+  p {
+    padding: 0px 20px;
+    margin: 0px;
+    margin-top: 8px;
+    opacity: 0.7;
+  }
 `;
 
 const ImageContainer = styled.div`
   position: relative;
-  height: 10rem;
+  height: auto;
+  width: 100%;
+  &:before {
+    content: "";
+    display: block;
+    width: 100%;
+    padding-top: 60%;
+  }
 `;
 
 const Figure = styled.figure`
   position: relative;
   margin: 0;
+  figcaption {
+    padding: 10px 20px 0px 20px;
+    font-weight: 700;
+  }
 `;
 
 const Anchor = styled.a`
