@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
 export const StyledButton = styled.button`
-  background-color: lightsalmon;
-  padding: 0.8rem;
+  background-color: #FFC100;
+  padding: 0.5rem;
   border-radius: 0.6rem;
   color: black;
   text-decoration: none;
@@ -10,6 +10,7 @@ export const StyledButton = styled.button`
   border: none;
   font-size: inherit;
   cursor: pointer;
+  width: fit;
 
   ${({ variant }) =>
     variant === "delete" &&

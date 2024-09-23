@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FormContainer, Input, Label } from "./Form";
 import { StyledButton } from "./StyledButton.js";
 import { useRouter } from "next/router.js";
 import useSWR from "swr";
@@ -26,6 +25,42 @@ export default function Comments({ locationName, comments }) {
       border-bottom: solid 1px black;
       padding: 20px;
     }
+  `;
+
+  const FormContainer = styled.form`
+    width: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+  `;
+
+  const FormRow = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  `;
+
+  const Label = styled.label`
+    flex: 0 0 150px;
+  `;
+
+  const Input = styled.input`
+    flex: 1;
+    max-width: 300px;
+    padding: 8px;
+    border-radius: 10px;
+    border: 2px solid black;
+  `;
+
+  const CommentField = styled.textarea`
+    resize: both;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 8px;
+    max-width: 700px;
+    flex: 1;
   `;
 
   async function handleSubmitComment(e) {
@@ -117,7 +152,7 @@ export default function Comments({ locationName, comments }) {
                     <div>
                         <StyledButton onClick={() => startEditing(_id, comment)}>
                           Edit
-                        </StyledButton>
+                        </StyledButton> &nbsp;
                         <StyledButton onClick={() => handleDeleteComment(_id)}>
                           Delete
                         </StyledButton>
@@ -129,12 +164,19 @@ export default function Comments({ locationName, comments }) {
       ) : (
         <h2>Add a comment:</h2>
       )}
-
+      <br /> 
       <FormContainer onSubmit={handleSubmitComment}>
-        <Label htmlFor="name">Your Name</Label>
-        <Input type="text" name="name" placeholder="name" required />
-        <Label htmlFor="comment">Your Comment</Label>
-        <Input type="text" name="comment" placeholder="comment here..." required />
+
+        <FormRow>
+          <Label htmlFor="name"><strong>Your Name: &nbsp;</strong></Label>
+          <Input type="text" name="name" placeholder="Enter username" required /> 
+        </FormRow>
+
+        <FormRow>
+          <Label htmlFor="comment"><strong>Your Comment: &nbsp;</strong></Label>
+          <CommentField type="text" name="comment" placeholder="Enter your comment here..." required /> 
+        </FormRow>
+        
         <StyledButton type="submit">Send</StyledButton>
       </FormContainer>
     </Article>
