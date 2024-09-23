@@ -23,17 +23,17 @@ export default async function handler(request, response) {
       });
     }
 
-    //EDIT COMMENTS
-    if (request.method === "PUT") {
-      const updatedComment = await Comment.findByIdAndUpdate(id, request.body, {
-        new: true,
-      });
+    // //EDIT COMMENTS
+    // if (request.method === "PUT") {
+    //   const updatedComment = await Comment.findByIdAndUpdate(id, request.body, {
+    //     new: true,
+    //   });
       
-      return response.status(200).json({
-        message: "Comment updated successfully",
-        place: updatedComment,
-      });
-    }
+    //   return response.status(200).json({
+    //     message: "Comment updated successfully",
+    //     place: updatedComment,
+    //   });
+    // }
 
     //DELETING COMMENTS
     if (request.method === "DELETE") {

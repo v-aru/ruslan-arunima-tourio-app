@@ -85,25 +85,25 @@ export default function Comments({ locationName, comments }) {
     }
   }
 
-  async function handleEditComment (e, commentId) {
-    e.preventDefault();
-    try {
-      const response = await fetch(`/api/comments/${commentId}`, {
-        method: "PUT",
-        body: JSON.stringify({ comment: newCommentText}),
-        headers: {
-          "Content-Type" : "application/json",
-        },
-      });
-      if (response.ok) {
-        setEditCommentId(null);
-        setNewCommentText("");
-        mutate();
-      }
-    } catch (e) {
-      console.log(error);
-    }
-  }
+  // async function handleEditComment (e, commentId) {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch(`/api/comments/${commentId}`, {
+  //       method: "PUT",
+  //       body: JSON.stringify({ comment: newCommentText}),
+  //       headers: {
+  //         "Content-Type" : "application/json",
+  //       },
+  //     });
+  //     if (response.ok) {
+  //       setEditCommentId(null);
+  //       setNewCommentText("");
+  //       mutate();
+  //     }
+  //   } catch (e) {
+  //     console.log(error);
+  //   }
+  // }
 
   async function handleDeleteComment (commentId) {
     try {
@@ -122,10 +122,10 @@ export default function Comments({ locationName, comments }) {
     }
   }
 
-  const startEditing = (commentId, currentComment) => {
-    setEditCommentId(commentId);
-    setNewCommentText(currentComment);
-  };
+  // const startEditing = (commentId, currentComment) => {
+  //   setEditCommentId(commentId);
+  //   setNewCommentText(currentComment);
+  // };
 
   return (
     <Article>
@@ -142,7 +142,7 @@ export default function Comments({ locationName, comments }) {
                 </p>
                 { editCommentId === _id ? (
                   <>
-                    <Input type="text" value={newCommentText} onChange={(e) => setNewCommentText(e.target.value)} />
+                    <Input type="text" value={newCommentText} onChange={(e) => { setNewCommentText(e.target.value); console.log("Updated Comment Text:", e.target.value)}} />
                     &nbsp;
                     <StyledButton onClick={(e) => handleEditComment(e, _id)}> Save </StyledButton> 
                     &nbsp;
@@ -152,9 +152,9 @@ export default function Comments({ locationName, comments }) {
                     <span>{comment}</span>
                     )}
                     <div>
-                        <StyledButton onClick={() => startEditing(_id, comment)}>
+                        {/* <StyledButton onClick={() => startEditing(_id, comment)}>
                           Edit
-                        </StyledButton> &nbsp;
+                        </StyledButton> &nbsp; */}
                         <StyledButton onClick={() => handleDeleteComment(_id)}>
                           Delete
                         </StyledButton>

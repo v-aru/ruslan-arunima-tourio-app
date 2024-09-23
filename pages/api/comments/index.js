@@ -27,10 +27,10 @@ export default async function handler(request, response) {
         });
 
         return response.status(200).json(comments);
-      }
+    }
 
-      return response.status(400).json({ message: "Invalid query parameters." });
-    } 
+    return response.status(400).json({ message: "Invalid query parameters." });
+  }
 
   } catch (error) {
     console.log(error);
